@@ -44,11 +44,17 @@ def AMORDEGRC():
 def AMORLINC():
     pass
 
-def AND():
+def AND(value, *values):
     pass
 
-def ARABIC():
-    pass
+ARABIC_DICT = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+
+def ARABIC(text):
+    parsed_text = str(text).strip().upper()
+    if any(chr not in ARABIC_DICT.keys() for chr in parsed_text):
+        raise TypeError('Input is not valid Roman numerals')
+    if len(parsed_text) == 0: return 0
+    return sum([ARABIC_DICT[chr] for chr in parsed_text])
 
 def AREAS():
     pass
