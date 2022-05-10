@@ -3,9 +3,20 @@ def ABS(number):
         return abs(number)
     else: raise TypeError('Only integers are allowed')
 
-def ACCRINT(issue, first_interest, settlement, rate, par, frequency, basis=0, calc_method=True):
-    pass
+def _ACCRINT_a(i):
+    # number of accrued days for the quasi-coupon period within the odd period
+    return 1
 
+def _ACCRINT_nl(i):
+    # normal length in days of the quasi-coupon period within the odd period
+    return 1
+
+def ACCRINT(issue, first_interest, settlement, rate, par, frequency, basis=0, calc_method=True):
+    if frequency not in [1, 2, 4]: raise ValueError('Incorrect frequency value, must be: 1, 2 or 4')
+    nc = 1 # number of quasi-coupon periods that fit in the odd period
+    sum_value = sum([(_ACCRINT_a(i) / _ACCRINT_nl(i)) for i in range(1, nc+1)])
+    return par * (rate / frequency) * sum_value
+    
 def ACCRINTM(issue, settlement, rate, par, basis=0):
     pass
 
