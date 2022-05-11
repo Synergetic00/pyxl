@@ -1,7 +1,10 @@
+import math
+
 def ABS(number):
-    if isinstance(number, int):
-        return abs(number)
-    else: raise TypeError('Only integers are allowed')
+    '''Absolute value of a number.'''
+    try: cnumber = int(number)
+    except: raise TypeError('Only integers are allowed')
+    return abs(cnumber)
 
 def _ACCRINT_a(i):
     # number of accrued days for the quasi-coupon period within the odd period
@@ -12,19 +15,28 @@ def _ACCRINT_nl(i):
     return 1
 
 def ACCRINT(issue, first_interest, settlement, rate, par, frequency, basis=0, calc_method=True):
+    '''Accrued interest of security with periodic payments.'''
     if frequency not in [1, 2, 4]: raise ValueError('Incorrect frequency value, must be: 1, 2 or 4')
     nc = 1 # number of quasi-coupon periods that fit in the odd period
     sum_value = sum([(_ACCRINT_a(i) / _ACCRINT_nl(i)) for i in range(1, nc+1)])
     return par * (rate / frequency) * sum_value
     
 def ACCRINTM(issue, settlement, rate, par, basis=0):
+    '''Accrued interest of security paying at maturity.'''
     pass
 
-def ACOS():
-    pass
+def ACOS(number):
+    '''Inverse cosine of a value, in radians.'''
+    try: cnumber = float(number)
+    except ValueError: raise TypeError('Only floats are allowed')
+    return math.acos(cnumber)
 
-def ACOSH():
-    pass
+def ACOSH(number):
+    '''Inverse hyperbolic cosine of a number.'''
+    try: cnumber = float(number)
+    except ValueError: raise TypeError('Only floats are allowed')
+    if cnumber < 1: raise ValueError(f'Value should be greater than or equal to 1.')
+    return math.acosh(cnumber)
 
 def ACOT():
     pass
