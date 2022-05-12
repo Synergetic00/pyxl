@@ -27,4 +27,5 @@ if __name__ == '__main__':
     print(ACOSH(1.5))
     print(FISHER(0.75))
     print(FISHERINV(FISHER(0.75)))
+    print(CONCAT("hello", " ", "world"))
     # print(B2)

@@ -256,10 +256,12 @@ def COMBINA():
 def COMPLEX():
     pass
 
-def CONCAT():
+def CONCAT(*params):
+    return CONCATENATE(*params)
     pass
 
-def CONCATENATE():
+def CONCATENATE(*params):
+    return ''.join(params)
     pass
 
 def CONFIDENCE():
