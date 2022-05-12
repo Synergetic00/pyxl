@@ -566,10 +566,27 @@ def FISHERINV(y):
 def FIXED():
     pass
 
-def FLOOR():
+def FLOOR(x, significance=1):
+    try: cx = float(x)
+    except: raise _ExcelError('Input is not a numerical value')
+
+    try: csignificance = float(significance)
+    except: raise _ExcelError('Significance is not a numerical value')
+
+    return math.floor(cx / csignificance) * csignificance
     pass
 
-def FLOOR_MATH():
+def FLOOR_MATH(x, significance=1, mode=1):
+    try: cx = float(x)
+    except: raise _ExcelError('Input is not a numerical value')
+
+    try: csignificance = float(significance)
+    except: raise _ExcelError('Significance is not a numerical value')
+
+    if abs(mode) != 1: raise _ExcelError('Mode is not 1 or -1')
+
+    if mode == 1 or cx > 0: return math.floor(cx / csignificance) * csignificance
+    return math.ceil(cx / csignificance) * csignificance
     pass
 
 def FLOOR_PRECISE():
