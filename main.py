@@ -20,7 +20,8 @@ def load_csv(file_path):
             globals()[cell_pos] = csv_data[x][y]
 
 if __name__ == '__main__':
-    # print(ARABIC('LVII'))
+    print(ARABIC('LVII'))
+    print(ARABIC('LIV'))
     # load_csv('example.csv')
     print(ACOS(0.5))
     print(ACOSH(1.5))

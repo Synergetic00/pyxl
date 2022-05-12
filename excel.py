@@ -69,7 +69,13 @@ def ARABIC(text):
     if any(chr not in ARABIC_DICT.keys() for chr in parsed_text):
         raise TypeError('Input is not valid Roman numerals')
     if len(parsed_text) == 0: return 0
-    return sum([ARABIC_DICT[chr] for chr in parsed_text])
+    result = 0
+    for i,c in enumerate(parsed_text):
+        if (i+1) == len(parsed_text) or ARABIC_DICT[c] >= ARABIC_DICT[parsed_text[i+1]]:
+            result += ARABIC_DICT[c]
+        else:
+            result -= ARABIC_DICT[c]
+    return result
 
 def AREAS():
     pass
