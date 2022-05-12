@@ -30,6 +30,16 @@ class TestExcelFunctions(unittest.TestCase):
     def test_CONCAT(self):
         self.assertEqual(CONCAT("HELLO", " ","WORLD"), "HELLO WORLD")
 
+    def test_FLOOR(self):
+        self.assertEqual(FLOOR(1.5), 1)
+        self.assertEqual(FLOOR(7, 5), 5)
+
+    def test_FLOOR_MATH(self):
+        self.assertEqual(FLOOR_MATH(1.5), 1)
+        self.assertEqual(FLOOR_MATH(7, 5), 5)
+        self.assertEqual(FLOOR_MATH(-7.3, 3), -9)
+        self.assertEqual(FLOOR_MATH(-7.3, 3, -1), -6)
+
 
 if __name__ == '__main__':
     unittest.main()
