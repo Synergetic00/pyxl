@@ -3,6 +3,9 @@ import math
 class _ExcelError(Exception):
     pass
 
+def _clamp(num, min_value, max_value):
+   return int(max(min(num, int(max_value)), int(min_value)))
+
 def ABS(number):
     '''Absolute value of a number.'''
     try: cnumber = int(number)
@@ -67,7 +70,7 @@ ARABIC_DICT = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
 def ARABIC(text):
     parsed_text = str(text).strip().upper()
     if any(chr not in ARABIC_DICT.keys() for chr in parsed_text):
-        raise TypeError('Input is not valid Roman numerals')
+        raise _ExcelError('Input is not valid Roman numerals')
     if len(parsed_text) == 0: return 0
     result = 0
     for i,c in enumerate(parsed_text):
@@ -146,14 +149,16 @@ def BETAINV():
 def BETA_INV():
     pass
 
-def BIN2DEC():
-    pass
+def BIN2DEC(number):
+    try: cnumber = int(f'0b{number}', 2)
+    except: raise _ExcelError('Input is not a number')
+    return cnumber if cnumber < 512 else cnumber - 1024
 
-def BIN2HEX():
-    pass
+# def BIN2HEX(number, places=0):
+#     return hex(int(number, 2))[2:]
 
-def BIN2OCT():
-    pass
+# def BIN2OCT(number, places=0):
+#     return oct(int(number, 2))[2:]
 
 def BINOMDIST():
     pass
@@ -197,8 +202,11 @@ def CEILING_PRECISE():
 def CELL():
     pass
 
-def CHAR():
-    pass
+def CHAR(number):
+    try: cnumber = int(number)
+    except: raise _ExcelError('Input has to be a number')
+    cnumber = _clamp(cnumber, 1, 255)
+    return chr(cnumber)
 
 def CHIDIST():
     pass
@@ -359,7 +367,7 @@ def CUMIPMT():
 def CUMPRINC():
     pass
 
-def DATE():
+def DATE(year, month, day):
     pass
 
 def DATEDIF():
@@ -542,11 +550,16 @@ def F_INV_RT():
 def FINV():
     pass
 
-def FISHER():
-    pass
+def FISHER(x):
+    try: cx = float(x)
+    except: raise _ExcelError('Input is not a numeric value')
+    if cx <= -1 or cx >= 1: raise _ExcelError('Value is out of bounds: [-1, 1]')
+    return (1 / 2) * math.log((1 + cx) / (1 - cx))
 
-def FISHERINV():
-    pass
+def FISHERINV(y):
+    try: cy = float(y)
+    except: raise _ExcelError('Input is not a numeric value')
+    return ((math.e ** (2 * y)) - 1) / ((math.e ** (2 * y)) + 1)
 
 def FIXED():
     pass
@@ -1010,14 +1023,14 @@ def NPV():
 def NUMBERVALUE():
     pass
 
-def OCT2BIN():
-    pass
+def OCT2BIN(number):
+    return bin(int(number, 8))[2:]
 
-def OCT2DEC():
-    pass
+def OCT2DEC(number):
+    return int(number, 8)
 
-def OCT2HEX():
-    pass
+def OCT2HEX(number):
+    return hex(int(number, 8))[2:]
 
 def ODD():
     pass
@@ -1077,7 +1090,7 @@ def PHONETIC():
     pass
 
 def PI():
-    pass
+    return 3.14159265358979
 
 def PMT():
     pass
@@ -1490,7 +1503,7 @@ def YEAR():
 def YEARFRAC():
     pass
 
-def YIELD():
+def YIELD(settlement, maturity, rate, pr, redemption, frequency, basis=0):
     pass
 
 def YIELDDISC():

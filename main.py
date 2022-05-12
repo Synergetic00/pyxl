@@ -25,4 +25,6 @@ if __name__ == '__main__':
     # load_csv('example.csv')
     print(ACOS(0.5))
     print(ACOSH(1.5))
+    print(FISHER(0.75))
+    print(FISHERINV(FISHER(0.75)))
     # print(B2)
