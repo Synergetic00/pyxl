@@ -24,5 +24,12 @@ class TestExcelFunctions(unittest.TestCase):
     def test_FISHERINV(self):
         self.assertAlmostEqual(FISHERINV(0.972955), 0.75)
 
+    def test_CONCATENATE(self):
+        self.assertEqual(CONCATENATE("HELLO", " ","WORLD"), "HELLO WORLD")
+    
+    def test_CONCAT(self):
+        self.assertEqual(CONCAT("HELLO", " ","WORLD"), "HELLO WORLD")
+
+
 if __name__ == '__main__':
     unittest.main()
