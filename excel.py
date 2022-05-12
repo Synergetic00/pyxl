@@ -1,5 +1,8 @@
 import math
 
+class _ExcelError(Exception):
+    pass
+
 def ABS(number):
     '''Absolute value of a number.'''
     try: cnumber = int(number)
@@ -16,7 +19,7 @@ def _ACCRINT_nl(i):
 
 def ACCRINT(issue, first_interest, settlement, rate, par, frequency, basis=0, calc_method=True):
     '''Accrued interest of security with periodic payments.'''
-    if frequency not in [1, 2, 4]: raise ValueError('Incorrect frequency value, must be: 1, 2 or 4')
+    if frequency not in [1, 2, 4]: raise _ExcelError('Incorrect frequency value, must be: 1, 2 or 4')
     nc = 1 # number of quasi-coupon periods that fit in the odd period
     sum_value = sum([(_ACCRINT_a(i) / _ACCRINT_nl(i)) for i in range(1, nc+1)])
     return par * (rate / frequency) * sum_value
@@ -28,14 +31,14 @@ def ACCRINTM(issue, settlement, rate, par, basis=0):
 def ACOS(number):
     '''Inverse cosine of a value, in radians.'''
     try: cnumber = float(number)
-    except ValueError: raise TypeError('Only floats are allowed')
+    except ValueError: raise _ExcelError('Only floats are allowed')
     return math.acos(cnumber)
 
 def ACOSH(number):
     '''Inverse hyperbolic cosine of a number.'''
     try: cnumber = float(number)
-    except ValueError: raise TypeError('Only floats are allowed')
-    if cnumber < 1: raise ValueError(f'Value should be greater than or equal to 1.')
+    except ValueError: raise _ExcelError('Only floats are allowed')
+    if cnumber < 1: raise _ExcelError(f'Value should be greater than or equal to 1.')
     return math.acosh(cnumber)
 
 def ACOT():
