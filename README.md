@@ -1,6 +1,7 @@
 # pyxl
 
-An implementation of Microsoft Excel written in Python 3. The project name is meant to be pronoused like Py(thon) Excel, not pixel.
+An implementation of Microsoft Excel written in Python 3.<br/>
+The project name is meant to be pronoused like Py(thon) Excel, not pixel.
 
 ## Commands
 
