@@ -19,7 +19,7 @@ class TestExcelFunctions(unittest.TestCase):
         self.assertEqual(CHAR(33), '!')
 
     def test_DATEVALUE(self):
-        self.assertEqual(DATEVALUE('8/22/201'), 40777)
+        self.assertEqual(DATEVALUE('8/22/2011'), 40777)
 
     def test_FISHER(self):
         self.assertAlmostEqual(FISHER(0.75), 0.9729551)
