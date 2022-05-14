@@ -1,3 +1,4 @@
+import datetime
 import math
 
 class _ExcelError(Exception):
@@ -45,9 +46,11 @@ def ACOSH(number):
     return math.acosh(cnumber)
 
 def ACOT():
+    '''Inverse cotangent of a value.'''
     pass
 
 def ACOTH():
+    '''Inverse hyperbolic cotangent of a value.'''
     pass
 
 def AGGREGATE():
@@ -370,13 +373,16 @@ def CUMPRINC():
     pass
 
 def DATE(year, month, day):
-    pass
+    return f'{month}/{day}/{year}'
 
 def DATEDIF():
     pass
 
-def DATEVALUE():
-    pass
+def DATEVALUE(date_text):
+    month, day, year = tuple(str(date_text).split('/'))
+    temp = datetime.datetime(1899, 12, 30)    # Note, not 31st Dec but 30th!
+    delta = datetime.datetime(int(year), int(month), int(day)) - temp
+    return float(delta.days) + (float(delta.seconds) / 86400)
 
 def DAVERAGE():
     pass
@@ -569,25 +575,18 @@ def FIXED():
 def FLOOR(x, significance=1):
     try: cx = float(x)
     except: raise _ExcelError('Input is not a numerical value')
-
     try: csignificance = float(significance)
     except: raise _ExcelError('Significance is not a numerical value')
-
     return math.floor(cx / csignificance) * csignificance
-    pass
 
 def FLOOR_MATH(x, significance=1, mode=1):
     try: cx = float(x)
     except: raise _ExcelError('Input is not a numerical value')
-
     try: csignificance = float(significance)
     except: raise _ExcelError('Significance is not a numerical value')
-
     if abs(mode) != 1: raise _ExcelError('Mode is not 1 or -1')
-
     if mode == 1 or cx > 0: return math.floor(cx / csignificance) * csignificance
     return math.ceil(cx / csignificance) * csignificance
-    pass
 
 def FLOOR_PRECISE():
     pass
